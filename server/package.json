@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "watch": "tsc -w",
     "start": "ts-node src/index.ts"
   },
   "keywords": [],
