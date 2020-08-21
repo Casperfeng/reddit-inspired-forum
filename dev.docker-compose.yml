@@ -1,0 +1,14 @@
+version: "3.1"
+# Intended only for local development
+
+services:
+  db:
+    image: postgres:10-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: reddit-inspired-forum-db
+
+    ports:
+      - 5432:5432
