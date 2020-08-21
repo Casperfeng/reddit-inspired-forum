@@ -17,7 +17,7 @@ Fullstack project with cool tech
 
 ## Run local database for development
 
-Setup an dev.env file in the server folder with these variables set:
+Setup an env.dev file in the server folder with these variables set:
 
 ```
 POSTGRES_PASSWORD
