@@ -1,8 +1,9 @@
 import * as dotenv from 'dotenv';
+import path from 'path';
 import { isProd } from './constants';
 
 export const configEnv = () => {
   isProd
-    ? dotenv.config({ path: './.env' })
-    : dotenv.config({ path: './.env.prod' });
+    ? dotenv.config({ path: path.join(__dirname, './.env') })
+    : dotenv.config({ path: path.join(__dirname, './.env.prod') });
 };
