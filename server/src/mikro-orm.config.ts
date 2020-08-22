@@ -1,7 +1,10 @@
 import { MikroORM } from '@mikro-orm/core';
 import path from 'path';
+import { configEnv } from './config';
 import { Post } from './entities/Post';
 import { isProd } from './constants';
+
+configEnv();
 
 export default {
   migrations: {
