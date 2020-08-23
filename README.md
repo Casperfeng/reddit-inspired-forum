@@ -15,7 +15,33 @@ Fullstack project with cool tech
 - Chakra
 - Docker
 
-## Run local database for development
+## Server
+
+Navigate to the server repository:
+
+```
+  cd server
+```
+
+1.  Install dependencies
+
+```
+yarn
+```
+
+2. Start server with nodemon (running on js)
+
+```
+yarn run dev
+```
+
+3. Update js files in /dist folder
+
+```
+yarn run tsc -w
+```
+
+### Run local database for development
 
 Setup an env.dev file in the server folder with these variables set:
 
