@@ -26,11 +26,13 @@
     "@mikro-orm/migrations": "^4.0.0-alpha.0",
     "@mikro-orm/postgresql": "^4.0.0-alpha.0",
     "apollo-server-express": "^2.16.1",
+    "class-validator": "^0.12.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "graphql": "^15.3.0",
     "pg": "^8.3.0",
-    "type-graphql": "^1.0.0"
+    "reflect-metadata": "^0.1.13",
+    "type-graphql": "^1.0.0-rc.3"
   },
   "mikro-orm": {
     "useTsNode": true,
