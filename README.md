@@ -6,7 +6,7 @@ Fullstack project with cool tech
 - TypeScript
 - GraphQL
 - URQL/Apollo
-- Node.js
+- Node.js (with express)
 - PostgreSQL
 - MikroORM/TypeORM
 - Redis
