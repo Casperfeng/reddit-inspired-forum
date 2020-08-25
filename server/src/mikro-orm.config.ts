@@ -2,6 +2,7 @@ import { MikroORM } from '@mikro-orm/core';
 import path from 'path';
 import { configEnv } from './config';
 import { Post } from './entities/Post';
+import { User } from './entities/User';
 import { isProd } from './constants';
 
 configEnv();
@@ -11,7 +12,7 @@ export default {
     path: path.join(__dirname, './migrations'), // path to the folder with migrations
     pattern: /^[\w-]+\d+\.[tj]s$/, // regex pattern for the migration files
   },
-  entities: [Post],
+  entities: [Post, User],
   dbName: process.env.POSTGRES_DB,
   port: 5432,
   password: process.env.POSTGRES_PASSWORD,
