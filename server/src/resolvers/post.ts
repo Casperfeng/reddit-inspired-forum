@@ -44,4 +44,17 @@ export class PostResolver {
 
     return post;
   }
+
+  @Mutation(() => Boolean)
+  async deletePostById(
+    @Arg('id', () => Int) id: number,
+    @Ctx() { em }: MyContext
+  ): Promise<boolean> {
+    try {
+      await em.nativeDelete(Post, { id });
+    } catch (e) {
+      return false;
+    }
+    return true;
+  }
 }

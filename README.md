@@ -20,7 +20,7 @@ Fullstack project with cool tech
 Navigate to the server repository:
 
 ```
-  cd server
+cd server
 ```
 
 1.  Install dependencies
