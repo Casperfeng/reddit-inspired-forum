@@ -14,8 +14,8 @@ export default {
   entities: [Post],
   dbName: process.env.POSTGRES_DB,
   port: 5432,
-  user: process.env.POSTGRES_PASSWORD,
-  password: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  user: process.env.POSTGRES_USER,
   debug: !isProd,
 
   type: 'postgresql',
