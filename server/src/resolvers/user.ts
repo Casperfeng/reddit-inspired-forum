@@ -33,7 +33,7 @@ class UserResponse {
   @Field(() => [FieldError], { nullable: true })
   errors?: FieldError[];
 
-  @Field()
+  @Field(() => User, { nullable: true })
   user?: User;
 }
 
@@ -45,11 +45,23 @@ export class UserResolver {
     @Ctx() { em }: MyContext
   ): Promise<UserResponse> {
     const hashedPwd = await argon2.hash(options.password);
-    const user = await em.create(User, {
+    const user = em.create(User, {
       username: options.username.toLowerCase(),
       password: hashedPwd,
     });
-    await em.persistAndFlush(user);
+
+    try {
+      await em.persistAndFlush(user);
+    } catch (err) {
+      return {
+        errors: [
+          {
+            field: 'username',
+            message: 'username already exists',
+          },
+        ],
+      };
+    }
     return { user };
   }
 
