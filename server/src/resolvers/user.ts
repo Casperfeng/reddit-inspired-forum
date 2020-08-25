@@ -13,7 +13,7 @@ class UsernamePasswordInput {
 
 @Resolver()
 export class UserResolver {
-  @Mutation(() => String)
+  @Mutation(() => User)
   async register(
     @Arg('options', () => UsernamePasswordInput) options: UsernamePasswordInput,
     @Ctx() { em }: MyContext
