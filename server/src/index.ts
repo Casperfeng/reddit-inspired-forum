@@ -36,6 +36,7 @@ const main = async () => {
         sameSite: 'lax', // related to csrf protection
         secure: isProd, //only works in https
       },
+      saveUninitialized: false,
       //TODO hide secret in .env
       secret: 'dsjaiodjisaodjijdiowqdjsia',
       resave: false,
