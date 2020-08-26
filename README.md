@@ -43,7 +43,7 @@ yarn run tsc -w
 
 ### Run local database for development
 
-Setup an env.dev file in the server folder with these variables set:
+Setup an .env (used for dev environment) file in the server folder with these variables set:
 
 ```
 POSTGRES_PASSWORD
