@@ -56,3 +56,23 @@ After this you can run:
 ```
   docker-compose -f dev.docker-compose.yml up -d
 ```
+
+## Client
+
+Navigate to the client repository:
+
+```
+cd client
+```
+
+1.  Install dependencies
+
+```
+yarn
+```
+
+2. Start next.js client
+
+```
+yarn next dev
+```
