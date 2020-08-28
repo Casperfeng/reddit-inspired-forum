@@ -1,12 +1,14 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import { Box, Button } from '@chakra-ui/core';
+import { useMutation } from 'urql';
 import Wrapper from '../components/Wrapper';
 import InputField from '../components/InputField';
 
 interface Props {}
 
 const Register: React.FC<Props> = ({}) => {
+  const [] = useMutation(``);
   return (
     <Wrapper size='small'>
       <Formik
@@ -27,7 +29,7 @@ const Register: React.FC<Props> = ({}) => {
                 name='password'
                 placeholder='password'
                 label='Password'
-                type='password'
+                type={'password'}
               />
             </Box>
             <Button

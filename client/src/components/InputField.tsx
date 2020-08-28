@@ -17,7 +17,12 @@ const InputField: React.FC<Props> = ({ label, size: _, ...props }) => {
   return (
     <FormControl isInvalid={!!error}>
       <FormLabel htmlFor={props.name}>{label}</FormLabel>
-      <Input {...field} id={props.name} placeholder={props.placeholder} />
+      <Input
+        {...field}
+        id={props.name}
+        placeholder={props.placeholder}
+        {...props}
+      />
       {error && <FormErrorMessage>{error}</FormErrorMessage>}
     </FormControl>
   );
