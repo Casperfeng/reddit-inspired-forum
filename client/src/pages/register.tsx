@@ -27,7 +27,7 @@ const Register: React.FC<Props> = ({}) => {
       <Formik
         initialValues={{ username: '', password: '' }}
         onSubmit={(values) => {
-          register(values);
+          return register(values);
         }}
       >
         {({ isSubmitting }) => (
