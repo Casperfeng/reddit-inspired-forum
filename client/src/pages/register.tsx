@@ -7,14 +7,27 @@ import InputField from '../components/InputField';
 
 interface Props {}
 
+const REGISTER_MUTATION = `mutation Register($username: String!, $password: String!) {
+  register(options: { username: $username, password: $password}){
+    user {
+      id
+      username      
+    }
+    errors {
+      message
+      field
+    } 
+  }
+}`;
+
 const Register: React.FC<Props> = ({}) => {
-  const [] = useMutation(``);
+  const [, register] = useMutation(REGISTER_MUTATION);
   return (
     <Wrapper size='small'>
       <Formik
         initialValues={{ username: '', password: '' }}
         onSubmit={(values) => {
-          console.log(values);
+          register(values);
         }}
       >
         {({ isSubmitting }) => (
