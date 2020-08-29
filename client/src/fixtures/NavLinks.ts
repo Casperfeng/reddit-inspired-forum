@@ -1,6 +1,6 @@
 export type NavLink = {
   label: string;
-  linkTo?: string;
+  linkTo: string;
 };
 
 export const NavLinks: NavLink[] = [
