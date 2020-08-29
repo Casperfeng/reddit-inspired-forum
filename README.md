@@ -1,4 +1,4 @@
-# reddit-inspired-forum
+# Forum inspired by Reddit
 
 Fullstack project with cool tech
 
