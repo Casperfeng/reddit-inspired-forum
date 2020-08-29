@@ -1,6 +1,6 @@
-# Forum inspired by Reddit
+# ![project logo](https://raw.githubusercontent.com/Casperfeng/reddit-inspired-forum/master/client/public/images/logo/reddit_clone.png)
 
-Fullstack project with cool tech
+Fullstack project based on this stack:
 
 - React
 - TypeScript
