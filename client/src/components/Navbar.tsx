@@ -12,14 +12,13 @@ const Navbar: React.FC<Props> = ({}) => {
       alignItems='center'
       justifyContent='space-between'
       h={'80px'}
-      bg='steelblue'
     >
-      <Box mx={'5px'} color='white'>
+      <Box mx={'5px'} color='gray'>
         Logo
       </Box>
       <Box mx={'30px'} display='flex' justifyContent='space-around'>
         {NavLinks.map((link: NavLink, index: number) => (
-          <Box key={index} mx={'7px'} color='white'>
+          <Box key={index} mx={'7px'} color='gray'>
             <NextLink href={link.linkTo}>
               <Link>{link.label}</Link>
             </NextLink>
