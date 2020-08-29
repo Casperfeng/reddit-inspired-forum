@@ -29,16 +29,16 @@ cd server
 yarn
 ```
 
-2. Start server with nodemon (running on js)
-
-```
-yarn run dev
-```
-
-3. Update js files in /dist folder
+2. Update js files in /dist folder
 
 ```
 yarn run tsc -w
+```
+
+3. Start server with nodemon (running on js)
+
+```
+yarn run dev
 ```
 
 ### Run local database for development
