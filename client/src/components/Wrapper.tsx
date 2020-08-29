@@ -8,7 +8,7 @@ interface Props {
 const Wrapper: React.FC<Props> = ({ children, size = 'default' }) => {
   return (
     <Box
-      mt={7}
+      mt={8}
       maxW={size === 'default' ? '850px' : '450px'}
       w='100%'
       mx='auto'

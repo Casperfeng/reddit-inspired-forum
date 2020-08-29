@@ -54,6 +54,16 @@ export class UserResolver {
     @Arg('options', () => UsernamePasswordInput) options: UsernamePasswordInput,
     @Ctx() { em, req }: MyContext
   ): Promise<UserResponse> {
+    if (options.username.length <= 2) {
+      return {
+        errors: [
+          {
+            field: 'username',
+            message: 'length must be 3 or more.',
+          },
+        ],
+      };
+    }
     const hashedPwd = await argon2.hash(options.password);
     const user = em.create(User, {
       username: options.username.toLowerCase(),
