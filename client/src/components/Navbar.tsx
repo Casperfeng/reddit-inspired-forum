@@ -13,8 +13,12 @@ const Navbar: React.FC<Props> = ({}) => {
       justifyContent='space-between'
       h={'80px'}
     >
-      <Box mx={'5px'} color='gray'>
-        <img src='/images/logo/reddit_clone.png' alt='project logo' />
+      <Box mx={'9px'} color='gray'>
+        <NextLink href='/'>
+          <Link>
+            <img src='/images/logo/reddit_clone.png' alt='project logo' />
+          </Link>
+        </NextLink>
       </Box>
       <Box mx={'30px'} display='flex' justifyContent='space-around'>
         {NavLinks.map((link: NavLink, index: number) => (
