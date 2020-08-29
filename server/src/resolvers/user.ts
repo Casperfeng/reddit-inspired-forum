@@ -63,8 +63,7 @@ export class UserResolver {
           },
         ],
       };
-    }
-    if (options.password.length <= 2) {
+    } else if (options.password.length <= 2) {
       return {
         errors: [
           {
@@ -83,6 +82,7 @@ export class UserResolver {
     try {
       await em.persistAndFlush(user);
     } catch (err) {
+      console.error(err);
       return {
         errors: [
           {
