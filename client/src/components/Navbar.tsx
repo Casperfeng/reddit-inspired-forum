@@ -14,11 +14,11 @@ const Navbar: React.FC<Props> = ({}) => {
       h={'80px'}
     >
       <Box mx={'5px'} color='gray'>
-        Logo
+        <img src='/images/logo/reddit_clone.png' alt='project logo' />
       </Box>
       <Box mx={'30px'} display='flex' justifyContent='space-around'>
         {NavLinks.map((link: NavLink, index: number) => (
-          <Box key={index} mx={'7px'} color='gray'>
+          <Box key={index} mr={'15px'} color='gray'>
             <NextLink href={link.linkTo}>
               <Link>{link.label}</Link>
             </NextLink>
