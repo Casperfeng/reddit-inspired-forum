@@ -35,14 +35,13 @@ const Navbar: React.FC<Props> = ({}) => {
         {authenticated !== null &&
           NavLinks.map(
             (link: NavLink, index: number) =>
-              !link.auth ||
-              (authenticated && (
+              (!link.auth || authenticated) && (
                 <Box key={index} mr={'15px'} color='gray'>
                   <NextLink href={link.linkTo}>
                     <Link>{link.label}</Link>
                   </NextLink>
                 </Box>
-              ))
+              )
           )}
       </Box>
     </Box>
