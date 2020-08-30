@@ -5,6 +5,10 @@ export type NavLink = {
 
 export const NavLinks: NavLink[] = [
   {
+    label: 'Login',
+    linkTo: '/login',
+  },
+  {
     label: 'Register',
     linkTo: '/register',
   },
