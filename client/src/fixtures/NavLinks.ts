@@ -11,11 +11,6 @@ export const NavLinks: NavLink[] = [
     auth: false,
   },
   {
-    label: 'Logout',
-    linkTo: '/logout',
-    auth: true,
-  },
-  {
     label: 'Register',
     linkTo: '/register',
     auth: false,

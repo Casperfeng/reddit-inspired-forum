@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Link } from '@chakra-ui/core';
+import { Box, Button, Flex, Link } from '@chakra-ui/core';
 import NextLink from 'next/link';
 import NavLinks, { NavLink } from '../fixtures/NavLinks';
 import { useMeQuery } from '../generated/graphql';
@@ -18,12 +18,7 @@ const Navbar: React.FC<Props> = ({}) => {
     authenticated = true;
   }
   return (
-    <Box
-      display='flex'
-      alignItems='center'
-      justifyContent='space-between'
-      h={'80px'}
-    >
+    <Flex alignItems='center' justifyContent='space-between' h={'80px'}>
       <Box mx={'9px'} color='gray'>
         <NextLink href='/'>
           <Link>
@@ -31,11 +26,12 @@ const Navbar: React.FC<Props> = ({}) => {
           </Link>
         </NextLink>
       </Box>
-      <Box mx={'30px'} display='flex' justifyContent='space-around'>
+      <Flex mx={'30px'} justifyContent='space-around'>
         {authenticated !== null &&
           NavLinks.map(
             (link: NavLink, index: number) =>
-              (!link.auth || authenticated) && (
+              !link.auth &&
+              !authenticated && (
                 <Box key={index} mr={'15px'} color='gray'>
                   <NextLink href={link.linkTo}>
                     <Link>{link.label}</Link>
@@ -43,8 +39,13 @@ const Navbar: React.FC<Props> = ({}) => {
                 </Box>
               )
           )}
-      </Box>
-    </Box>
+        {authenticated && (
+          <Box mr={'15px'} color='gray'>
+            <Button>Logout</Button>
+          </Box>
+        )}
+      </Flex>
+    </Flex>
   );
 };
 
