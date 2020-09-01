@@ -6,6 +6,7 @@ import {
   LoginMutation,
   MeQuery,
   RegisterMutation,
+  LogoutMutation,
 } from '../generated/graphql';
 
 //helper function to cast types
@@ -28,6 +29,14 @@ const client = createClient({
     cacheExchange({
       updates: {
         Mutation: {
+          logout: (_result, args, cache, info) => {
+            updateQuery<LogoutMutation, MeQuery>(
+              cache,
+              { query: MeDocument },
+              _result,
+              () => ({ me: null })
+            );
+          },
           login: (_result, args, cache, info) => {
             updateQuery<LoginMutation, MeQuery>(
               cache,
