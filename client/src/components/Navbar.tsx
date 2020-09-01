@@ -18,7 +18,14 @@ const Navbar: React.FC<Props> = ({}) => {
     authenticated = true;
   }
   return (
-    <Flex alignItems='center' justifyContent='space-between' h={'80px'}>
+    <Flex
+      alignItems='center'
+      justifyContent='space-between'
+      h={'80px'}
+      zIndex={1}
+      position='sticky'
+      top={0}
+    >
       <Box mx={'9px'} color='gray'>
         <NextLink href='/'>
           <Link>
@@ -27,6 +34,9 @@ const Navbar: React.FC<Props> = ({}) => {
         </NextLink>
       </Box>
       <Flex mx={'30px'} justifyContent='space-around'>
+        {authenticated && data?.me && (
+          <Box mr={'15px'}>Hello, {data.me?.username}!</Box>
+        )}
         {authenticated !== null &&
           NavLinks.map(
             (link: NavLink, index: number) =>
@@ -41,7 +51,7 @@ const Navbar: React.FC<Props> = ({}) => {
           )}
         {authenticated && (
           <Box mr={'15px'} color='gray'>
-            <Button>Logout</Button>
+            <Button variant='link'>Logout</Button>
           </Box>
         )}
       </Flex>

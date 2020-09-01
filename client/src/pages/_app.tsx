@@ -1,8 +1,14 @@
-import { ThemeProvider, CSSReset } from '@chakra-ui/core';
+import { ThemeProvider, CSSReset, theme } from '@chakra-ui/core';
 import { Provider, createClient, dedupExchange, fetchExchange } from 'urql';
 import { cacheExchange, Cache, QueryInput } from '@urql/exchange-graphcache';
-import { MeDocument, LoginMutation, MeQuery } from '../generated/graphql';
+import {
+  MeDocument,
+  LoginMutation,
+  MeQuery,
+  RegisterMutation,
+} from '../generated/graphql';
 
+//helper function to cast types
 function updateQuery<Result, Query>(
   cache: Cache,
   qi: QueryInput,
@@ -22,17 +28,33 @@ const client = createClient({
     cacheExchange({
       updates: {
         Mutation: {
-          login: (result, args, cache, info) => {
+          login: (_result, args, cache, info) => {
             updateQuery<LoginMutation, MeQuery>(
               cache,
               { query: MeDocument },
-              result,
+              _result,
               (result, query) => {
                 if (result?.login?.errors) {
                   return query;
                 } else {
                   return {
                     me: result?.login?.user,
+                  };
+                }
+              }
+            );
+          },
+          register: (_result, args, cache, info) => {
+            updateQuery<RegisterMutation, MeQuery>(
+              cache,
+              { query: MeDocument },
+              _result,
+              (result, query) => {
+                if (result?.register?.errors) {
+                  return query;
+                } else {
+                  return {
+                    me: result?.register?.user,
                   };
                 }
               }
