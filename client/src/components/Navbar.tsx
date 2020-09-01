@@ -59,7 +59,7 @@ const Navbar: React.FC<Props> = ({}) => {
               }}
               isLoading={logoutFetching}
             >
-              Logout
+              logout
             </Button>
           </Box>
         )}
