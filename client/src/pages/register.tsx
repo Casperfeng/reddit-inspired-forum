@@ -7,6 +7,8 @@ import { toErrorMap } from '../utils/toErrorMap';
 import Wrapper from '../components/Wrapper';
 import InputField from '../components/InputField';
 import Navbar from '../components/Navbar';
+import { createUrqlClient } from '../utils/createUrqlClient';
+import { withUrqlClient } from 'next-urql';
 
 interface Props {}
 
@@ -59,4 +61,4 @@ const Register: React.FC<Props> = ({}) => {
   );
 };
 
-export default Register;
+export default withUrqlClient(createUrqlClient)(Register);

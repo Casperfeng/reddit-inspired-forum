@@ -1,6 +1,5 @@
-import { CSSReset, theme, ThemeProvider } from '@chakra-ui/core';
-import { withUrqlClient } from 'next-urql';
-import { createUrqlClient } from '../utils/createUrqlClient';
+import { CSSReset, ThemeProvider } from '@chakra-ui/core';
+import theme from '../theme';
 
 function MyApp({ Component, pageProps }: any) {
   return (
@@ -11,4 +10,4 @@ function MyApp({ Component, pageProps }: any) {
   );
 }
 
-export default withUrqlClient(createUrqlClient, { ssr: true })(MyApp);
+export default MyApp;
