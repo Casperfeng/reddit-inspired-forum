@@ -22,7 +22,7 @@ export async function sendEmail(to: string, text: string) {
     from: '"Fred Foo 👻" <foo@example.com>', // sender address
     to,
     subject: 'Reset password', // Subject line
-    text,
+    html: text,
   });
 
   console.log('Message sent: %s', info.messageId);
