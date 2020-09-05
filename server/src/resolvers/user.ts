@@ -8,10 +8,51 @@ import {
   ObjectType,
   Query,
 } from 'type-graphql';
+import { EntityManager } from '@mikro-orm/postgresql';
 import { MyContext } from 'src/types';
 import { User } from '../entities/User';
 import argon2 from 'argon2';
 import { COOKIE_NAME } from '../constants';
+
+export const validateRegister = (options: UsernamePasswordInput) => {
+  if (!options.email.includes('@')) {
+    return [
+      {
+        field: 'email',
+        message: 'invalid email',
+      },
+    ];
+  }
+
+  if (options.username.length <= 2) {
+    return [
+      {
+        field: 'username',
+        message: 'length must be greater than 2',
+      },
+    ];
+  }
+
+  if (options.username.includes('@')) {
+    return [
+      {
+        field: 'username',
+        message: 'cannot include an @',
+      },
+    ];
+  }
+
+  if (options.password.length <= 2) {
+    return [
+      {
+        field: 'password',
+        message: 'length must be greater than 2',
+      },
+    ];
+  }
+
+  return null;
+};
 
 @InputType()
 class UsernamePasswordInput {
@@ -19,6 +60,8 @@ class UsernamePasswordInput {
   username: string;
   @Field(() => String)
   password: string;
+  @Field(() => String)
+  email: string;
 }
 
 @ObjectType()
@@ -57,48 +100,42 @@ export class UserResolver {
 
   @Mutation(() => UserResponse)
   async register(
-    @Arg('options', () => UsernamePasswordInput) options: UsernamePasswordInput,
+    @Arg('options') options: UsernamePasswordInput,
     @Ctx() { em, req }: MyContext
   ): Promise<UserResponse> {
-    if (options.username.length <= 2) {
-      return {
-        errors: [
-          {
-            field: 'username',
-            message: 'length must be 3 or more.',
-          },
-        ],
-      };
-    } else if (options.password.length <= 2) {
-      return {
-        errors: [
-          {
-            field: 'password',
-            message: 'length must be 3 or more.',
-          },
-        ],
-      };
+    const errors = validateRegister(options);
+    if (errors) {
+      return { errors };
     }
-    const hashedPwd = await argon2.hash(options.password);
-    const user = em.create(User, {
-      username: options.username.toLowerCase(),
-      password: hashedPwd,
-    });
 
+    const hashedPassword = await argon2.hash(options.password);
+    let user;
     try {
-      await em.persistAndFlush(user);
+      const result = await (em as EntityManager)
+        .createQueryBuilder(User)
+        .getKnexQuery()
+        .insert({
+          username: options.username,
+          email: options.email,
+          password: hashedPassword,
+          created_at: new Date(),
+          updated_at: new Date(),
+        })
+        .returning('*');
+      user = result[0];
     } catch (err) {
-      console.error(err);
       return {
         errors: [
           {
             field: 'username',
-            message: 'username already exists',
+            message: 'username already taken',
           },
         ],
       };
     }
+
     req.session!.userId = user.id;
+
     return { user };
   }
 
