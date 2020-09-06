@@ -14,7 +14,6 @@ import connectRedis from 'connect-redis';
 import { isProd } from './constants';
 import { MyContext } from './types';
 import { COOKIE_NAME } from './constants';
-import { User } from './entities/User';
 
 const main = async () => {
   const orm = await MikroORM.init(microConfig);

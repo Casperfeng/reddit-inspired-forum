@@ -2,7 +2,6 @@ import {
   Resolver,
   Mutation,
   Arg,
-  InputType,
   Field,
   Ctx,
   ObjectType,
@@ -13,16 +12,8 @@ import { MyContext } from 'src/types';
 import { User } from '../entities/User';
 import argon2 from 'argon2';
 import { COOKIE_NAME } from '../constants';
-
-@InputType()
-class UsernamePasswordInput {
-  @Field(() => String)
-  username: string;
-  @Field(() => String)
-  password: string;
-  @Field(() => String)
-  email: string;
-}
+import { UsernamePasswordInput } from './UsernamePasswordInput';
+import { validateRegister } from '../util/validateRegister';
 
 @ObjectType()
 class FieldError {
@@ -47,6 +38,7 @@ export class UserResolver {
   @Mutation(() => Boolean)
   async forgotPassword(@Arg('email') email: string, @Ctx() { em }: MyContext) {
     const user = await em.findOne(User, { email });
+    return user;
   }
 
   @Query(() => User, { nullable: true })
@@ -107,10 +99,10 @@ export class UserResolver {
   ): Promise<UserResponse> {
     const user = await em.findOne(
       User,
-      usernameOrEmail.includes('@')
+      !usernameOrEmail.includes('@')
         ? { username: usernameOrEmail }
         : {
-            username: usernameOrEmail,
+            email: usernameOrEmail,
           }
     );
 
