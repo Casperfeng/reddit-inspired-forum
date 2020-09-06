@@ -14,46 +14,6 @@ import { User } from '../entities/User';
 import argon2 from 'argon2';
 import { COOKIE_NAME } from '../constants';
 
-export const validateRegister = (options: UsernamePasswordInput) => {
-  if (!options.email.includes('@')) {
-    return [
-      {
-        field: 'email',
-        message: 'invalid email',
-      },
-    ];
-  }
-
-  if (options.username.length <= 2) {
-    return [
-      {
-        field: 'username',
-        message: 'length must be greater than 2',
-      },
-    ];
-  }
-
-  if (options.username.includes('@')) {
-    return [
-      {
-        field: 'username',
-        message: 'cannot include an @',
-      },
-    ];
-  }
-
-  if (options.password.length <= 2) {
-    return [
-      {
-        field: 'password',
-        message: 'length must be greater than 2',
-      },
-    ];
-  }
-
-  return null;
-};
-
 @InputType()
 class UsernamePasswordInput {
   @Field(() => String)
@@ -141,12 +101,18 @@ export class UserResolver {
 
   @Mutation(() => UserResponse, { nullable: true })
   async login(
-    @Arg('options', () => UsernamePasswordInput) options: UsernamePasswordInput,
+    @Arg('usernameOrEmail') usernameOrEmail: string,
+    @Arg('password') password: string,
     @Ctx() { em, req }: MyContext
   ): Promise<UserResponse> {
-    const user = await em.findOne(User, {
-      username: options.username.toLowerCase(),
-    });
+    const user = await em.findOne(
+      User,
+      usernameOrEmail.includes('@')
+        ? { username: usernameOrEmail }
+        : {
+            username: usernameOrEmail,
+          }
+    );
 
     if (!user) {
       return {
@@ -158,8 +124,8 @@ export class UserResolver {
         ],
       };
     }
-    const hashedPwd = await argon2.hash(options.password);
-    const valid = await argon2.verify(hashedPwd, options.password);
+    const hashedPwd = await argon2.hash(password);
+    const valid = await argon2.verify(hashedPwd, password);
 
     if (!valid) {
       return { errors: [{ field: 'password', message: 'incorrect password' }] };
