@@ -8,8 +8,7 @@ services:
   db:
     container_name: reddit-inspired-forum-db
     image: postgres:10-alpine
-    env_file:
-      - .env
+    env_file: .env
     restart: always
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -19,3 +18,14 @@ services:
       - database_data:/var/lib/postgresql/data
     ports:
       - 5432:5432
+
+  redis:
+    image: "redis:alpine"
+    command: redis-server
+    ports:
+     - "6379:6379"
+    volumes:
+      - $PWD/redis-data:/var/lib/redis
+      - $PWD/redis.conf:/usr/local/etc/redis/redis.conf
+    environment:
+     - REDIS_REPLICATION_MODE=master

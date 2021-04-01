@@ -1,9 +1,9 @@
 import { MikroORM } from '@mikro-orm/core';
 import path from 'path';
 import { configEnv } from './config';
+import { isProd } from './constants';
 import { Post } from './entities/Post';
 import { User } from './entities/User';
-import { isProd } from './constants';
 
 configEnv();
 

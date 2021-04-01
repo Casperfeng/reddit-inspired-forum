@@ -41,7 +41,7 @@ yarn run tsc -w
 yarn run dev
 ```
 
-### Run local database for development
+### Run local postgres database and redis for development
 
 Setup an .env (used for dev environment) file in the server folder with these variables set:
 
@@ -54,7 +54,7 @@ POSTGRES_DB
 After this you can run:
 
 ```
-  docker-compose -f dev.docker-compose.yml up -d
+docker-compose -f dev.docker-compose.yml up -d
 ```
 
 ## Client
