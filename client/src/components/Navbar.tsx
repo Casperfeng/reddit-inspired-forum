@@ -39,7 +39,7 @@ const Navbar: React.FC<Props> = ({}) => {
       </Box>
       <Flex mx={'30px'} justifyContent='space-around'>
         {authenticated && data?.me && (
-          <Box mr={'15px'}>Hello, {data.me?.username}!</Box>
+          <Box mr={'15px'}>{data.me?.username}</Box>
         )}
         {authenticated !== null &&
           NavLinks.map(
