@@ -1,13 +1,14 @@
-import Navbar from '../components/Navbar';
-import { Formik, Form } from 'formik';
 import { Box, Button } from '@chakra-ui/core';
-import { useRouter } from 'next/router';
-import { useLoginMutation } from '../generated/graphql';
-import { toErrorMap } from '../utils/toErrorMap';
-import Wrapper from '../components/Wrapper';
-import InputField from '../components/InputField';
-import { createUrqlClient } from '../utils/createUrqlClient';
+import { Form, Formik } from 'formik';
 import { withUrqlClient } from 'next-urql';
+import NextLink from 'next/link';
+import { useRouter } from 'next/router';
+import InputField from '../components/InputField';
+import Navbar from '../components/Navbar';
+import Wrapper from '../components/Wrapper';
+import { useLoginMutation } from '../generated/graphql';
+import { createUrqlClient } from '../utils/createUrqlClient';
+import { toErrorMap } from '../utils/toErrorMap';
 
 const Login = () => {
   const router = useRouter();
@@ -42,6 +43,7 @@ const Login = () => {
                   type={'password'}
                 />
               </Box>
+              <Box mt={4}>
               <Button
                 mt={4}
                 type='submit'
@@ -50,6 +52,16 @@ const Login = () => {
               >
                 Login
               </Button>
+              <NextLink href='/forgot-password'><Button
+                mt={4}
+                ml={2}
+                type='submit'
+                variantColor='teal'
+              >
+                Forgotten password
+              </Button>
+              </NextLink>
+              </Box>
             </Form>
           )}
         </Formik>

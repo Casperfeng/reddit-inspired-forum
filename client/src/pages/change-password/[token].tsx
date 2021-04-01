@@ -54,10 +54,9 @@ const ChangePassword: NextPage<{token: string}> = ({ token }) => {
                   type={'password'}
                 />
               </Box>
-              {tokenError && <Box color='red'>{tokenError}</Box>}
               <Box mt={4}>
                 <InputField
-                  name='newPasswordConfirm'
+                  name='newPasswordConfirmed'
                   placeholder='confirm new password'
                   label='Password'
                   type={'password'}
@@ -72,6 +71,7 @@ const ChangePassword: NextPage<{token: string}> = ({ token }) => {
               >
                 Change password
               </Button>
+              {tokenError && <Box color='tomato'>{tokenError}</Box>}
             </Form>
           )}
         </Formik>
