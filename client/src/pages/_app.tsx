@@ -21,10 +21,10 @@ const client = createClient({
   exchanges: [dedupExchange, cacheExchange({
     updates: {
       Mutation: {
-        login: (result, args, cache, info) => {
+        login: (_result, args, cache, info) => {
           betterUpdateQuery<LoginMutation, MeQuery>(cache,
             {query: MeDocument},
-            result,
+            _result,
             (result, query) => {
               if (result.login!.errors) {
                 return query
