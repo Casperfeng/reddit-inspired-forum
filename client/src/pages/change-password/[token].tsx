@@ -1,11 +1,20 @@
 import { Box, Button } from '@chakra-ui/core';
 import { Form, Formik } from 'formik';
 import { NextPage } from 'next';
+import { withUrqlClient } from 'next-urql';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import InputField from '../../components/InputField';
 import Navbar from '../../components/Navbar';
 import Wrapper from '../../components/Wrapper';
+import { useChangePasswordMutation } from '../../generated/graphql';
+import { createUrqlClient } from '../../utils/createUrqlClient';
+import { toErrorMap } from '../../utils/toErrorMap';
 
 const ChangePassword: NextPage<{token: string}> = ({ token }) => {
+  const [, changePassword] = useChangePasswordMutation();
+  const router = useRouter();
+  const [tokenError, setTokenError] = useState('');
   return (
     <>
      <Navbar />
@@ -13,6 +22,25 @@ const ChangePassword: NextPage<{token: string}> = ({ token }) => {
         <Formik
           initialValues={{ newPassword: '', newPasswordConfirmed: '' }}
           onSubmit={async (values, { setErrors }) => {
+            if (values.newPassword !== values.newPasswordConfirmed){
+              setErrors({ newPasswordConfirmed: "Non-matching password" });
+            }
+            else {
+              const response = await changePassword({
+                newPassword: values.newPassword,
+                token
+              });
+
+              if (response.data?.changePassword.errors) {
+                const errorMap = toErrorMap(response.data.changePassword.errors);
+                if ('token' in errorMap) {
+                  setTokenError(errorMap.token);
+                }
+                setErrors(errorMap);
+              } else if (response.data?.changePassword.user) {
+                router.push("/");
+              }
+            }
           }}
         >
           {({ isSubmitting }) => (
@@ -26,6 +54,7 @@ const ChangePassword: NextPage<{token: string}> = ({ token }) => {
                   type={'password'}
                 />
               </Box>
+              {tokenError && <Box color='red'>{tokenError}</Box>}
               <Box mt={4}>
                 <InputField
                   name='newPasswordConfirm'
@@ -57,4 +86,4 @@ ChangePassword.getInitialProps = ( {query} ) => {
     }
 }
 
-export default ChangePassword;
+export default withUrqlClient(createUrqlClient, { ssr: false})(ChangePassword as any);
