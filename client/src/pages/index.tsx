@@ -1,7 +1,7 @@
 import { withUrqlClient } from 'next-urql';
-import { createUrqlClient } from '../utils/createUrqlClient';
-import { usePostsQuery, Post } from '../generated/graphql';
 import Navbar from '../components/Navbar';
+import { Post, usePostsQuery } from '../generated/graphql';
+import { createUrqlClient } from '../utils/createUrqlClient';
 
 const Index = () => {
   const [{ data }] = usePostsQuery();

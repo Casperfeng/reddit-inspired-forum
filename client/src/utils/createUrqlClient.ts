@@ -1,16 +1,17 @@
-import { dedupExchange, fetchExchange } from 'urql';
 import { cacheExchange } from '@urql/exchange-graphcache';
+import { dedupExchange, fetchExchange } from 'urql';
 import {
-  LogoutMutation,
-  MeQuery,
-  MeDocument,
-  LoginMutation,
-  RegisterMutation,
+  LoginMutation, LogoutMutation,
+
+  MeDocument, MeQuery,
+
+
+  RegisterMutation
 } from '../generated/graphql';
 import { updateQuery } from './updateQuery';
 
 export const createUrqlClient = (ssrExchange: any) => ({
-  url: 'http://localhost:8000/graphql',
+  url: process.env.API_URL ? `${process.env.API_URL}/graphql` : 'http://localhost:8000/graphql',
   fetchOptions: {
     credentials: 'include' as const,
   },

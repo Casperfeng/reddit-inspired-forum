@@ -13,7 +13,7 @@ import { User } from '../entities/User';
 import argon2 from 'argon2';
 import { COOKIE_NAME } from '../constants';
 import { UsernamePasswordInput } from './UsernamePasswordInput';
-import { validateRegister } from '../util/validateRegister';
+import { validateRegister } from '../utils/validateRegister';
 
 @ObjectType()
 class FieldError {
