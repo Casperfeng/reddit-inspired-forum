@@ -76,3 +76,9 @@ yarn
 ```
 yarn next dev
 ```
+
+Setup an .env (used for dev environment) file in the client folder with these variables set:
+
+```
+API_URL
+```
