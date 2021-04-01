@@ -25,12 +25,12 @@ const Navbar: React.FC<Props> = ({}) => {
     <Flex
       alignItems='center'
       justifyContent='space-between'
-      h={'80px'}
+      h={'90px'}
       zIndex={1}
       position='sticky'
       top={0}
     >
-      <Box mx={'9px'} color='gray'>
+      <Box mx={'9px'} width={'150px'} color='gray'>
         <NextLink href='/'>
           <Link>
             <img src='/images/logo/reddit_clone.png' alt='project logo' />
