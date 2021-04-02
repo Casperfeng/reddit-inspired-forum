@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "lint": "eslint --ext .ts,.tsx",
     "gen": "graphql-codegen --config codegen.yml"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged && npm run lint"
+    }
   },
   "dependencies": {
     "@chakra-ui/core": "^0.5.2",
@@ -14,7 +20,9 @@
     "@emotion/styled": "^10.0.27",
     "@fontsource/open-sans": "^4.2.2",
     "@fontsource/raleway": "^4.2.2",
+    "@next/eslint-plugin-next": "^10.1.2",
     "@urql/exchange-graphcache": "^3.0.2",
+    "babel-eslint": "^10.1.0",
     "emotion-theming": "^10.0.27",
     "formik": "^2.1.5",
     "graphql": "^15.3.0",
@@ -33,6 +41,15 @@
     "@graphql-codegen/typescript-operations": "1.17.8",
     "@graphql-codegen/typescript-urql": "^2.0.1",
     "@types/node": "^14.6.0",
+    "@typescript-eslint/eslint-plugin": "^4.20.0",
+    "@typescript-eslint/parser": "^4.20.0",
+    "eslint": "^7.23.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.23.1",
+    "husky": "^6.0.0",
+    "prettier": "^2.2.1",
+    "pretty-quick": "^3.1.0",
     "typescript": "^4.0.2"
   }
 }

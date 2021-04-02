@@ -3,7 +3,7 @@ import { Form, Formik } from 'formik';
 import { NextPage } from 'next';
 import { withUrqlClient } from 'next-urql';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import InputField from '../../components/InputField';
 import Navbar from '../../components/Navbar';
 import Wrapper from '../../components/Wrapper';
@@ -44,7 +44,7 @@ const ChangePassword: NextPage<{token: string}> = ({ token }) => {
           }}
         >
           {({ isSubmitting }) => (
-            <Form>           
+            <Form>
               <Box mt={4}>
               <Box mt={4}>
                 <InputField
