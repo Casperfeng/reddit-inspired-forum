@@ -11,7 +11,6 @@ import { COOKIE_NAME, isProd } from './constants';
 import { PostResolver } from './resolvers/post';
 import { UserResolver } from './resolvers/user';
 import typeOrmConfig from './type-orm.config';
-import { MyContext } from './types';
 
 const main = async () => {
   const connection = await createConnection(typeOrmConfig);
@@ -47,7 +46,7 @@ const main = async () => {
       },
       saveUninitialized: false,
       //TODO hide secret in .env
-      secret: 'dsjaiodjisaodjijdiowqdjsia',
+      secret: process.env.JWT_SECRET ? process.env.JWT_SECRET : '',
       resave: false,
     })
   );
@@ -57,7 +56,7 @@ const main = async () => {
       resolvers: [PostResolver, UserResolver],
       validate: false,
     }),
-    context: ({ req, res }): MyContext => ({ req, res, redis }),
+    context: ({ req, res })=> ({ req, res, redis }),
   });
 
   apolloServer.applyMiddleware({

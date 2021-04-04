@@ -49,6 +49,7 @@ Setup an .env (used for dev environment) file in the server folder with these va
 POSTGRES_PASSWORD
 POSTGRES_USER
 POSTGRES_DB
+JWT_SECRET
 ```
 
 After this you can run:

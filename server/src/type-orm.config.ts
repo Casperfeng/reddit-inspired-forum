@@ -12,6 +12,6 @@ export default {
     password: process.env.POSTGRES_PASSWORD,
     port: 5432,
     logging: true,
-    synchronize: false,
+    synchronize: true,
     entities: [Post, User]
   } as ConnectionOptions
